@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "teste-app": {
+    "angular-app-contacts": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/teste-app",
+            "outputPath": "dist/angular-app-contacts",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "teste-app:build:production"
+              "browserTarget": "angular-app-contacts:build:production"
             },
             "development": {
-              "browserTarget": "teste-app:build:development"
+              "browserTarget": "angular-app-contacts:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "teste-app:build"
+            "browserTarget": "angular-app-contacts:build"
           }
         },
         "test": {

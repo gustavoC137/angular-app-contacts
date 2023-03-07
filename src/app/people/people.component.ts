@@ -31,20 +31,14 @@ export class PeopleComponent {
   }
 
   getPeople(): void {
-    console.warn('call get people');
     this.personService.getPeople().subscribe((people) => (this.people = people.data));
   }
 
   search(value: string): void {
-    console.warn('value search ==>', value);
     if (!value.length) return;
 
     this.personService.searchPeople(value)
       .subscribe((people) => (this.people = people.data));
-  }
-
-  openNew(): void {
-    console.warn('new');
   }
 
 }

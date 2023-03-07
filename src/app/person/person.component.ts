@@ -59,7 +59,6 @@ export class PersonComponent {
   }
 
   getPerson(id: string): void {
-    console.warn('call get person');
     this.personService.getPerson(id).subscribe((person) => (this.person = person.data));
   }
 

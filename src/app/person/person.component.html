@@ -1,0 +1,89 @@
+<div class="card-container">
+  <div class="flex flex-wrap align-items-center justify-content-center card-container blue-container">
+    <p-card class="sm:col-12 md:col-12 lg:col-8 p-mb-12 border-round">
+      <ng-template pTemplate="header">
+        <div class="">
+          <div *ngIf="!isEditMode" (click)="toggleEditMode()"
+               class="text-800 text-4xl m-4 px-2 pt-4 text-center">
+            {{person.name || 'Nome'}}
+          </div>
+          <div *ngIf="isEditMode" class="text-800 text-4xl m-4 mx-3 px-2 pt-4 text-center">
+            <input
+              style="width: 100%"
+              class="text-800 text-4xl text-center"
+              type="text"
+              pInputText placeholder="Nome"
+              [(ngModel)]="person.name"
+              (blur)="toggleEditMode()"
+            >
+          </div>
+        </div>
+      </ng-template>
+      <p-listbox
+        [options]="person.contacts"
+        [(ngModel)]="selectedContact"
+        optionLabel="name"
+      >
+        <ng-template let-contact let-index pTemplate="item">
+          <label class="col-12 flex align-items-center justify-content-center">
+
+            <div class="col-12 flex" *ngIf="contact === selectedContact; else elseBlock">
+              <div class="col-7">
+                <p-inputMask *ngIf="contact.contact_type === 'cellphone'" [style]="{'width':'100%'}"
+                             mask="(99) 99999-9999" [(ngModel)]="contact.contact"
+                             placeholder="(99) 99999-9999"></p-inputMask>
+                <p-inputMask *ngIf="contact.contact_type === 'whatsapp'" [style]="{'width':'100%'}"
+                             mask="+99 (99) 9999-9999" [(ngModel)]="contact.contact"
+                             placeholder="+99 (99) 99999-9999"></p-inputMask>
+                <input
+                  *ngIf="contact.contact_type === 'email'"
+                  style="width: 100%"
+                  class="p-pr-2"
+                  type="text"
+                  pInputText placeholder="email@email.com"
+                  [(ngModel)]="contact.contact">
+
+                <p-inputMask *ngIf="contact.contact_type === 'landline'" [style]="{'width':'100%'}"
+                             mask="(99) 9999-9999" [(ngModel)]="contact.contact"
+                             placeholder="(99) 9999-9999"></p-inputMask>
+              </div>
+              <div class="col-5">
+                <p-selectButton
+                  class="teste"
+                  [options]="contactTypeOptions"
+                  [(ngModel)]="contact.contact_type"
+                >
+                  <ng-template let-item class="" style="background-color: red; border: red">
+                    <p-icon type="button" style="border: red" [pTooltip]="item.tooltip" tooltipPosition="top">
+                      <i [class]="item.icon"></i>
+                    </p-icon>
+                  </ng-template>
+                </p-selectButton>
+              </div>
+            </div>
+            <ng-template #elseBlock>
+              <div class="px-2 text-2xl">{{contact.contact}}</div>
+              <p-icon type="button" style="border: red" [pTooltip]="contactTypeOptions[0].tooltip"
+                      tooltipPosition="top">
+                <i [class]="getIconContact(contact)" class="px-2 text-2xl"></i>
+              </p-icon>
+            </ng-template>
+          </label>
+        </ng-template>
+      </p-listbox>
+      <div class="flex justify-content-end flex-wrap">
+        <button pButton pRipple type="button" icon="pi pi-plus" (click)="addContact()"
+                class="mt-4 p-button-rounded p-button-secondary p-button-outlined"></button>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-end flex-wrap">
+          <button pButton pRipple type="button" label="Voltar" (click)="goBack()"
+                  class="p-button-outlined p-button-secondary"></button>
+          <button pButton pRipple type="button" label="Salvar" (click)="save()" class="p-button p-button-primary"></button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+<router-outlet></router-outlet>

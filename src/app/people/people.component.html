@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="flex flex-wrap align-items-center justify-content-center card-container blue-container">
+    <p-card class="sm:col-12 md:col-6 lg:col-6 p-mb-4">
+      <ng-template pTemplate="header">
+        <div class="text-800 text-5xl m-4 px-2 pt-4 text-center">
+          Contatos
+        </div>
+      </ng-template>
+
+
+      <p-listbox
+        [options]="people"
+        [filter]="true"
+        [(ngModel)]="selectedPerson"
+        optionLabel="name"
+      >
+        <ng-template pTemplate="filter">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              #searchBox
+              type="text"
+              pInputText
+              (input)="search(searchBox.value)"
+              placeholder="Buscar por nome..."
+            />
+          </span>
+        </ng-template>
+
+        <ng-template let-person pTemplate="item">
+          <div routerLink="/person/{{person.id}}" class="person-item">
+            <div>{{ person.name }}</div>
+          </div>
+        </ng-template>
+
+      </p-listbox>
+
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-end flex-wrap">
+          <button pButton pRipple type="button" icon="pi pi-plus" pTooltip="Adicionar novo Contato"
+                  routerLink="/person"
+                  class="p-button-rounded p-button-outlined"></button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
